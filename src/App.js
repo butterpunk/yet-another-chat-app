@@ -1,24 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
+import { useForm } from 'react-hook-form';
+
 import './App.css';
 
-function App() {
+const mapStateToProps = (state) => ({
+    messages: state
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    newMessage: dispatch(/**/)
+});
+
+const { connect } = ReactRedux;
+const App = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
+
+function App(props) {
+  
+  let { value, newMessage }  = props;
+  const { register, handleSubmit, errors } = useForm(); // initialise the hook
+  
+  const onSubmit = data => {
+    newMessage(data.message);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {value.map((msg)=>{
+        return <p>{msg}</p>
+      })}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input name="message" ref={register} />
+        <input type="submit" />
+      </form>
     </div>
   );
 }
