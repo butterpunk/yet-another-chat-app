@@ -1,23 +1,27 @@
-import { addMessage, ADD_MESSAGE } from './actions';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
+import messages from './messages/redux/reducer';
+const uuidv1 = require('uuid/v1');
 
 //These are side effects that I need to move somewhere else; 
-const io = require('socket.io-client');
-const socket = io('http://localhost:3005');
-socket.on('chat message', function(msg){
-    store.dispatch(addMessage(msg));
-});
+// const io = require('socket.io-client');
+// const socket = io('http://localhost:3005');
 
-let initialState = ['Hi this is your first message'];
-const mesages = (state = initialState, action) => {
-    switch(action.type){
-        case ADD_MESSAGE:
-            return [...state, action.payload];
-        default:
-            return state;
+const App = combineReducers({messages});
+
+let initialState = {
+    messages: {
+        [uuidv1()]: { body: 'Hi, this is your first message' }
     }
+};
+//Store Stuff
+const configureStore = () => {
+    //side effect -> we want to subscribe to chat messages
+    // socket.on('chat message', function(msg){
+    //     store.dispatch(addMessage(msg));
+    // });
+    let store = createStore(App, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+    return store;
 }
 
-const store = createStore(mesages, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-
+const store = configureStore();
 export default store;

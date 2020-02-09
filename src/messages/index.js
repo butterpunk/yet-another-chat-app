@@ -1,16 +1,13 @@
 import { connect } from 'react-redux';
-import { addMessage } from '../actions';
+import { addMessage } from './redux/actions';
+import { getMessages } from './redux/reducer';
 import Messages from './container';
 
 const mapStateToProps = (state) => ({
-    messages: state
+    messages: getMessages(state)
 })
-
-const mapDispatchToProps = (dispatch) => ({
-    newMessage: (payload) => dispatch(addMessage(payload))
-});
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    { newMessage: addMessage }
   )(Messages);
