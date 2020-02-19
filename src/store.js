@@ -10,7 +10,10 @@ import rootReducer from "./reducers";
 // const App = combineReducers({messages});
 let initialState = {
     messages: {
-        [uuidv1()]: { body: 'Hi, this is your first message' }
+        [uuidv1()]: { 
+            body: 'Hi, this is your first message',
+            username: 'Chatbot'
+        }
     },
 };
 //Store Stuff
