@@ -58,7 +58,7 @@ const EmojiField = styled(InputDisplay)`
   text-align: center;
 `;
 
-const Button = styled.input`
+const Button = styled.button`
   background-color: #3F51B5;
   color: white;
   text-align: center;
@@ -74,38 +74,34 @@ const Button = styled.input`
 `
 
 function Login(props) {
-  const { loginUser, loginError, isAuthenticated } = props;
+  const { createUser } = props;
   const { register, handleSubmit } = useForm(); // initialise the hook
   const [showEmojiPicker, setEmojiPicker] = useState(false);
   const [userEmoji, setEmoji] = useState('😍')
 
   const onSubmit = data => {
-    loginUser(data.email, data.password);
+    createUser(data.username, userEmoji);
   };
 
   const renderedEmoji = <Emoji emoji={userEmoji} size={16} />
-  // if(isAuthenticated) {
-  //   return <Redirect to="/" />;
-  // }else{
-    return (
-        <>
-          <GreyContainer>
-            <WhiteHeadline>👋 Welcome to</WhiteHeadline>
-            <GreyHeadline>⚡️ Blake's Chat App</GreyHeadline>
-            <WhiteText> Enter a username and choose an avatar to get started</WhiteText>
-            <form>
-            {renderedEmoji}
-              <EmojiField onClick={()=>setEmojiPicker(true)} value={userEmoji} ></EmojiField>
-              <UsernameField name="username" ref={register} placeholder="username"></UsernameField>
-              <Button name="submit" value="Go"></Button>
-            </form>
-          </GreyContainer>
-          {showEmojiPicker &&
-              <Picker set='emojione' onSelect={(v)=> {setEmoji(v.native); setEmojiPicker(false);}} autoFocus={false}/>
-          }
-        </>
-      );
-  // }
+  return (
+      <>
+        <GreyContainer>
+          <WhiteHeadline>👋 Welcome to</WhiteHeadline>
+          <GreyHeadline>⚡️ Blake's Chat App</GreyHeadline>
+          <WhiteText> Enter a username and choose an avatar to get started</WhiteText>
+          <form onSubmit={handleSubmit(onSubmit)}>
+          {renderedEmoji}
+            <EmojiField onClick={()=>setEmojiPicker(true)} value={userEmoji} ></EmojiField>
+            <UsernameField name="username" ref={register} placeholder="username"></UsernameField>
+            <Button name="submit">Let's Go</Button>
+          </form>
+        </GreyContainer>
+        {showEmojiPicker &&
+            <Picker set='emojione' onSelect={(v)=> {setEmoji(v.native); setEmojiPicker(false);}} autoFocus={false}/>
+        }
+      </>
+  );
 }
 
 export default Login;

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addMessage, subscribeMessages } from '../../actions';
+import { createMessage, subscribeMessages } from '../../actions';
 import { getMessages, getUsername } from "../../reducers";
 import Messages from './container';
 
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => ({
 export default connect(
     mapStateToProps,
     { 
-        newMessage: addMessage,
+        newMessage: createMessage,
         subscribeMessages
     }
   )(Messages);

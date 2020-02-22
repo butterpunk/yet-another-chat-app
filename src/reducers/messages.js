@@ -1,10 +1,9 @@
 import {
-    ADD_MESSAGE
+    ADD_MESSAGE_SUCCESS
 } from "../actions/";
 const messages = (state = {}, action) => {
-    console.log('anything?', action.type, action.payload);
     switch(action.type){
-        case ADD_MESSAGE:
+        case ADD_MESSAGE_SUCCESS:
             return Object.assign(
                 {},
                 state,

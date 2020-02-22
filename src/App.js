@@ -1,34 +1,25 @@
 import React from 'react';
 
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Messages from './components/Messages';
-import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./components/Login";
 
 import './App.css';
 
 function App(props) {
-  const { isAuthenticated, isVerifying } = props;
-  return (
-      <Switch>
-        <ProtectedRoute
-          exact
-          path="/"
-          component={Messages}
-          isAuthenticated={isAuthenticated}
-          isVerifying={isVerifying}
-        />
-        <Route path="/login" component={Login} />
-      </Switch>
-  );
+  const { isUserCreated } = props;
+  if(isUserCreated){
+      return <Route path="/messages" component={Messages} />
+  }else{
+      return <Route path="/" component={Login} />
+  }
 }
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: state.auth.isAuthenticated,
-    isVerifying: state.auth.isVerifying
+    isUserCreated: state.auth.isUserCreated
   };
 }
 export default connect(mapStateToProps)(App);

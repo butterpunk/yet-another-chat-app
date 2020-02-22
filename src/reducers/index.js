@@ -8,5 +8,8 @@ export const getMessages = (state) => {
     return state.messages;
 }
 export const getUsername = (state) => {
-    return state.auth.user.email;
+    return state.auth.user.name;
+}
+export const getAvatar = (state) => {
+    return state.auth.user.avatar;
 }

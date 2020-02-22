@@ -6,7 +6,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import styled, { css } from 'styled-components';
 import Container from '@material-ui/core/Container';
-import TopMenu from '../TopMenu.js';
+import TopMenu from '../TopMenu';
 
 const ButtonDisplay = styled(Button)`
   background: transparent;
@@ -53,7 +53,7 @@ function Messages(props) {
 
   useEffect (() => {
     subscribeMessages();
-  });
+  },[]);
 
   const chatCard = (message) => {
     const { body, username} = message;
