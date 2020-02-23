@@ -81,6 +81,7 @@ function Login(props) {
 
   const onSubmit = data => {
     createUser(data.username, userEmoji);
+    props.history.push("/messages");
   };
 
   const renderedEmoji = <Emoji emoji={userEmoji} size={16} />

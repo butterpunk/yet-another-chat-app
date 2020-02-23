@@ -10,12 +10,12 @@ const DisplayAppBar= styled(AppBar)`
 `;
 
 function TopMenu(props) {
-    const { username, avatar } = props;
+    const { user } = props;
     return (
         <DisplayAppBar position="static">
         <Toolbar>
             <Typography variant="h6">
-              {avatar} {username}
+              {user.avatar} {user.name}
             </Typography>
         </Toolbar>
         </DisplayAppBar>

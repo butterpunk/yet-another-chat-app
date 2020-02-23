@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import { createMessage, subscribeMessages } from '../../actions';
-import { getMessages, getUsername } from "../../reducers";
+import { getMessages, getUser} from "../../reducers";
 import Messages from './container';
 
 const mapStateToProps = (state) => ({
     messages: getMessages(state),
-    username: getUsername(state)
+    user: getUser(state)
 })
 
 export default connect(

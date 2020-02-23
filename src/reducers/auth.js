@@ -6,11 +6,12 @@ import {
   
 export default (
     state = {
-      user: {
-        avatar: "😍",
-        id: "ocMWxz33RbQ5XLAFjwmb",
-        name: "Da Dude 52",
-      },
+      // user: {
+      //   avatar: "😍",
+      //   id: "ocMWxz33RbQ5XLAFjwmb",
+      //   name: "Da Dude 52",
+      // },
+      user: {},
       isUserCreated: true,
     },
     action
